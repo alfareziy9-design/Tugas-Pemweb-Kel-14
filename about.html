@@ -1,45 +1,574 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang Kami - My Website Project</title>
+    <title>Tentang Kami - LearnHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#14B8A6',
+                        dark: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Plus Jakarta Sans', sans-serif; }
+        html { scroll-behavior: smooth; }
+
+        @keyframes blob {
+            0%   { transform: translate(0px, 0px) scale(1); }
+            33%  { transform: translate(30px, -50px) scale(1.1); }
+            66%  { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Team card */
+        .team-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .team-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(79,70,229,0.13); }
+        .team-card img { transition: transform 0.4s; }
+        .team-card:hover img { transform: scale(1.06); }
+
+        /* Value card */
+        .value-card { transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+        .value-card:hover { border-color: #4F46E5; box-shadow: 0 8px 32px rgba(79,70,229,0.10); transform: translateY(-3px); }
+
+        /* Timeline */
+        .timeline-item { position: relative; padding-left: 2.5rem; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.45rem;
+            top: 1.8rem;
+            bottom: -1rem;
+            width: 2px;
+            background: linear-gradient(to bottom, #4F46E5, #14B8A6);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            width: 0.9rem;
+            height: 0.9rem;
+            background: #4F46E5;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.2);
+        }
+
+        /* Stat card */
+        .stat-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(79,70,229,0.12); }
+
+        /* Navbar active */
+        .nav-active { color: #4F46E5 !important; font-weight: 700; }
+        
+        /* Style untuk link profil tim */
+        .team-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .team-link:hover {
+            color: #4F46E5;
+        }
+    </style>
 </head>
+<body class="font-sans text-gray-700 bg-gray-50">
 
-<body>
-    <header>
-        <h1>Tentang Kami</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="about.html">Tentang</a></li>
-                <li><a href="portfolio.html">Portofolio</a></li>
-                <li><a href="contact.html">Kontak</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>Profil Singkat</h2>
-            <p>Kami adalah tim pengembang web yang berfokus pada pembuatan
-                aplikasi modern dan responsif.</p>
-            <img src="assets/images/team.jpg" alt="Foto Tim">
-        </section>
-        <section>
-            <h2>Visi dan Misi</h2>
-            <p>Visi kami adalah menciptakan solusi digital yang memudahkan hidup
-                masyarakat dalam berpengetahuan khalayak umum. Misi kami antara lain:</p>
-            <ul>
-                <li>Menyediakan layanan pengetahuan berkualitas tinggi</li>
-                <li>Memprioritaskan pengguna dalam pengetahuan umum</li>
-                <li>Terus berinovasi sesuai tren teknologi terbaru</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Platform Edukasi Interaktif</p>
+    <!-- ═══════════ NAVBAR ═══════════ -->
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <a href="index2.html" class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold">L</div>
+                    <span class="font-bold text-2xl text-dark">LearnHub</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index2.html" class="text-gray-600 hover:text-primary font-medium transition">Beranda</a>
+                    <a href="index2.html#courses" class="text-gray-600 hover:text-primary font-medium transition">Pendidikan</a>
+                    <a href="about.html" class="nav-active transition">Tentang Kami</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html" class="text-gray-600 hover:text-primary font-medium transition">Masuk</a>
+                    <a href="signup.html" class="bg-primary hover:bg-indigo-700 text-white px-5 py-2.5 rounded-full font-medium transition shadow-lg shadow-indigo-500/30">Daftar Gratis</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-btn" class="text-gray-600 hover:text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4 space-y-2">
+            <a href="index2.html" class="block text-gray-600 hover:text-primary font-medium py-2">Beranda</a>
+            <a href="about.html" class="block text-primary font-bold py-2">Tentang Kami</a>
+            <a href="login.html" class="block text-gray-600 hover:text-primary font-medium py-2">Masuk</a>
+            <a href="signup.html" class="block bg-primary text-white text-center py-2 rounded-full font-medium mt-2">Daftar Gratis</a>
+        </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="pt-32 pb-20 bg-gradient-to-br from-indigo-50 to-white overflow-hidden relative">
+        <div class="animate-blob absolute top-10 left-10 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-2xl opacity-30 pointer-events-none"></div>
+        <div class="animate-blob animation-delay-2000 absolute top-20 right-20 w-64 h-64 bg-teal-200 rounded-full mix-blend-multiply filter blur-2xl opacity-30 pointer-events-none"></div>
+        <div class="animate-blob animation-delay-4000 absolute bottom-0 left-1/2 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 text-sm text-gray-400 mb-8 justify-center">
+                <a href="index2.html" class="hover:text-primary transition">Beranda</a>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <span class="text-primary font-semibold">Tentang Kami</span>
+            </div>
+
+            <div class="text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-700 text-sm font-semibold mb-4">
+                    🌟 Kenali Kami Lebih Dekat
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-dark leading-tight mb-6">
+                    Kami Hadir untuk <br>
+                    <span class="text-primary">Masa Depan Anda</span>
+                </h1>
+                <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-10">
+                    LearnHub adalah platform edukasi digital yang menghubungkan pelajar dengan mentor terbaik, 
+                    menciptakan pengalaman belajar yang menyenangkan dan berdampak nyata.
+                </p>
+                <!-- Quick nav anchors -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="#profil" class="text-sm bg-white border border-gray-200 hover:border-primary hover:text-primary text-gray-600 px-4 py-2 rounded-full font-medium transition">Profil</a>
+                    <a href="#visi-misi" class="text-sm bg-white border border-gray-200 hover:border-primary hover:text-primary text-gray-600 px-4 py-2 rounded-full font-medium transition">Visi & Misi</a>
+                    <a href="#nilai" class="text-sm bg-white border border-gray-200 hover:border-primary hover:text-primary text-gray-600 px-4 py-2 rounded-full font-medium transition">Nilai-Nilai</a>
+                    <a href="#perjalanan" class="text-sm bg-white border border-gray-200 hover:border-primary hover:text-primary text-gray-600 px-4 py-2 rounded-full font-medium transition">Perjalanan</a>
+                    <a href="#tim" class="text-sm bg-white border border-gray-200 hover:border-primary hover:text-primary text-gray-600 px-4 py-2 rounded-full font-medium transition">Tim Kami</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ STATS ═══════════ -->
+    <section class="py-14 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-card reveal bg-indigo-50 rounded-2xl p-6 text-center border border-indigo-100">
+                    <div class="text-4xl font-extrabold text-primary mb-1">10K+</div>
+                    <div class="text-sm text-gray-500 font-medium">Pelajar Aktif</div>
+                </div>
+                <div class="stat-card reveal bg-teal-50 rounded-2xl p-6 text-center border border-teal-100">
+                    <div class="text-4xl font-extrabold text-secondary mb-1">500+</div>
+                    <div class="text-sm text-gray-500 font-medium">Materi Kursus</div>
+                </div>
+                <div class="stat-card reveal bg-indigo-50 rounded-2xl p-6 text-center border border-indigo-100">
+                    <div class="text-4xl font-extrabold text-primary mb-1">120+</div>
+                    <div class="text-sm text-gray-500 font-medium">Mentor Ahli</div>
+                </div>
+                <div class="stat-card reveal bg-teal-50 rounded-2xl p-6 text-center border border-teal-100">
+                    <div class="text-4xl font-extrabold text-secondary mb-1">98%</div>
+                    <div class="text-sm text-gray-500 font-medium">Kepuasan Pengguna</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PROFIL ═══════════ -->
+    <section id="profil" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="w-full md:w-1/2 reveal">
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-indigo-500 to-teal-400 rounded-3xl p-1 shadow-2xl shadow-indigo-200">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80"
+                                 alt="Tim LearnHub" class="w-full h-80 object-cover rounded-3xl">
+                        </div>
+                        <div class="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3 border border-gray-100">
+                            <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-dark text-sm">Berdiri sejak 2020</div>
+                                <div class="text-xs text-gray-500">4 tahun melayani</div>
+                            </div>
+                        </div>
+                        <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2 border border-gray-100">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center text-lg">🏆</div>
+                            <div>
+                                <div class="font-bold text-dark text-xs">Top Platform</div>
+                                <div class="text-xs text-gray-400">Indonesia 2024</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 reveal">
+                    <span class="inline-block py-1 px-3 rounded-full bg-indigo-100 text-primary text-sm font-semibold mb-4">📖 Cerita Kami</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-dark leading-tight mb-5">
+                        Profil Singkat <br><span class="text-primary">LearnHub</span>
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Kami adalah tim pengembang dan pendidik yang berfokus pada pembuatan 
+                        platform pembelajaran modern, responsif, dan mudah diakses oleh siapa saja 
+                        di seluruh Indonesia.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Berawal dari mimpi sederhana untuk mendemokratisasi pendidikan berkualitas, 
+                        LearnHub kini telah melayani lebih dari 10.000 pelajar aktif dengan ratusan 
+                        materi dari mentor terbaik di bidangnya.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Kami percaya bahwa setiap orang berhak mendapatkan akses ke pendidikan 
+                        berkualitas tanpa batasan geografis maupun ekonomi. Itulah mengapa kami 
+                        terus berinovasi untuk menghadirkan konten terbaik dengan harga yang terjangkau.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="flex items-center gap-2 bg-indigo-50 rounded-full px-4 py-2">
+                            <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            <span class="text-sm font-semibold text-primary">Berdiri 2020</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-teal-50 rounded-full px-4 py-2">
+                            <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                            <span class="text-sm font-semibold text-secondary">Berbasis di Jakarta</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-indigo-50 rounded-full px-4 py-2">
+                            <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            <span class="text-sm font-semibold text-primary">50+ Karyawan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ VISI MISI ═══════════ -->
+    <section id="visi-misi" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 reveal">
+                <span class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-700 text-sm font-semibold mb-3">🎯 Tujuan Kami</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark">Visi & Misi</h2>
+                <p class="text-gray-500 mt-3 max-w-xl mx-auto">Landasan yang mendorong kami untuk terus berinovasi setiap harinya.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Visi -->
+                <div class="reveal bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-3xl p-8 text-white shadow-xl shadow-indigo-200">
+                    <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-3">Visi</h3>
+                    <p class="text-indigo-100 leading-relaxed">
+                        Menjadi platform edukasi digital terdepan yang menciptakan solusi pembelajaran 
+                        inovatif, memudahkan akses ilmu pengetahuan bagi seluruh masyarakat Indonesia 
+                        tanpa batas ruang dan waktu.
+                    </p>
+                </div>
+                <!-- Misi -->
+                <div class="reveal bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
+                    <div class="w-12 h-12 bg-teal-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-dark mb-4">Misi</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm leading-relaxed">Menyediakan layanan pembelajaran berkualitas tinggi yang terjangkau bagi semua kalangan</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm leading-relaxed">Memprioritaskan pengalaman pengguna dalam setiap fitur yang kami kembangkan</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm leading-relaxed">Terus berinovasi mengikuti tren teknologi dan kebutuhan industri terbaru</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm leading-relaxed">Membangun komunitas pelajar yang saling mendukung dan menginspirasi satu sama lain</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-indigo-100 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm leading-relaxed">Menjalin kemitraan strategis dengan industri untuk menghasilkan lulusan siap kerja</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ NILAI-NILAI ═══════════ -->
+    <section id="nilai" class="py-20 bg-gradient-to-br from-indigo-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 reveal">
+                <span class="inline-block py-1 px-3 rounded-full bg-indigo-100 text-primary text-sm font-semibold mb-3">💡 Core Values</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark">Nilai-Nilai Kami</h2>
+                <p class="text-gray-500 mt-3 max-w-xl mx-auto">Prinsip yang menjadi fondasi setiap keputusan dan langkah kami.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="value-card reveal bg-white border border-gray-100 rounded-2xl p-6 cursor-default">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 text-2xl">🚀</div>
+                    <h4 class="font-bold text-dark mb-2">Inovasi</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Kami selalu mencari cara baru dan kreatif untuk memberikan pengalaman belajar yang lebih baik. Tidak ada yang terlalu nyaman untuk diperbaiki.</p>
+                </div>
+                <div class="value-card reveal bg-white border border-gray-100 rounded-2xl p-6 cursor-default">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4 text-2xl">🤝</div>
+                    <h4 class="font-bold text-dark mb-2">Kolaborasi</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Percaya bahwa belajar bersama menghasilkan hasil jauh lebih baik. Komunitas kami adalah kekuatan terbesar LearnHub.</p>
+                </div>
+                <div class="value-card reveal bg-white border border-gray-100 rounded-2xl p-6 cursor-default">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 text-2xl">⭐</div>
+                    <h4 class="font-bold text-dark mb-2">Kualitas</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Standar tinggi dalam setiap materi, mentor, dan fitur yang kami hadirkan. Tidak ada kompromi untuk kualitas.</p>
+                </div>
+                <div class="value-card reveal bg-white border border-gray-100 rounded-2xl p-6 cursor-default">
+                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4 text-2xl">♿</div>
+                    <h4 class="font-bold text-dark mb-2">Aksesibilitas</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Pendidikan berkualitas harus bisa diakses semua kalangan. Kami merancang platform agar ramah untuk semua pengguna.</p>
+                </div>
+                <div class="value-card reveal bg-white border border-gray-100 rounded-2xl p-6 cursor-default">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 text-2xl">🌱</div>
+                    <h4 class="font-bold text-dark mb-2">Pertumbuhan</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Mendorong setiap pelajar untuk terus berkembang melampaui batas kemampuan mereka. Growth mindset adalah inti dari kami.</p>
+                </div>
+                <div class="value-card reveal bg-white border border-gray-100 rounded-2xl p-6 cursor-default">
+                    <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4 text-2xl">❤️</div>
+                    <h4 class="font-bold text-dark mb-2">Komunitas</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Membangun lingkungan belajar yang hangat, suportif, dan penuh semangat positif. Setiap pelajar adalah bagian dari keluarga LearnHub.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PERJALANAN / TIMELINE ═══════════ -->
+    <section id="perjalanan" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 reveal">
+                <span class="inline-block py-1 px-3 rounded-full bg-teal-100 text-teal-700 text-sm font-semibold mb-3">📅 Milestone</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark">Perjalanan Kami</h2>
+                <p class="text-gray-500 mt-3 max-w-xl mx-auto">Dari ide sederhana hingga platform yang dipercaya ribuan pelajar.</p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">2020</span>
+                            <h4 class="font-bold text-dark">Lahirnya LearnHub</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">LearnHub didirikan oleh Arif Santoso dan Dewi Kartika dengan visi mendemokratisasi pendidikan berkualitas di Indonesia. Platform diluncurkan dengan 10 kursus perdana dan 500 pelajar pertama.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-teal-50 border border-teal-100 rounded-2xl p-5">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">2021</span>
+                            <h4 class="font-bold text-dark">Ekspansi & Pertumbuhan</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Mencapai 2.000 pelajar aktif, meluncurkan 50+ kursus baru, dan mulai menjalin kemitraan dengan perusahaan teknologi terkemuka di Indonesia untuk program magang dan sertifikasi.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">2022</span>
+                            <h4 class="font-bold text-dark">Fitur Live Learning & Komunitas</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Meluncurkan fitur belajar langsung bersama mentor secara real-time dan membangun forum komunitas aktif. Pengguna melonjak menjadi 5.000+ pelajar dengan 80+ mentor bergabung.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-teal-50 border border-teal-100 rounded-2xl p-5">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">2023</span>
+                            <h4 class="font-bold text-dark">Penghargaan & Pengakuan</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Menerima penghargaan sebagai "Platform Edukasi Terbaik Indonesia" dan meraih pendanaan Series A. Meluncurkan program beasiswa untuk 500 pelajar berprestasi dari keluarga kurang mampu.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot" style="background:#14B8A6"></div>
+                    <div class="bg-gradient-to-br from-indigo-600 to-teal-500 rounded-2xl p-5 text-white">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">2024 — Kini</span>
+                            <h4 class="font-bold">10.000+ Pelajar & Terus Tumbuh</h4>
+                        </div>
+                        <p class="text-sm text-indigo-100 leading-relaxed">Melampaui milestone 10.000 pelajar aktif, 500+ kursus, dan 120+ mentor. Kami terus berinovasi menghadirkan teknologi AI untuk personalisasi pembelajaran dan pengalaman belajar adaptif.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ TIM ═══════════ -->
+    <section id="tim" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 reveal">
+                <span class="inline-block py-1 px-3 rounded-full bg-indigo-100 text-primary text-sm font-semibold mb-3">👥 People Behind LearnHub</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-dark">Tim Kami</h2>
+                <p class="text-gray-500 mt-3 max-w-xl mx-auto">Orang-orang berdedikasi yang bekerja keras setiap hari untuk misi LearnHub.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://github.com/alfareziy9-design/Tugas-Git-Pemweb-Kel-14/raw/main/IMG-20251020-WA0014%5B1%5D.jpg" alt="Stevan Agustin Purba" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">
+                        <a href="portfolio-stevan.html" class="team-link">Stevan Agustin Purba</a>
+                    </h4>
+                    <p class="text-xs text-primary font-semibold mt-1 mb-2">CEO & Co-Founder</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Visioner platform edukasi dengan 10+ tahun pengalaman di industri teknologi.</p>
+                </div>
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://i.pravatar.cc/200?img=5" alt="CTO" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">Dewi Kartika</h4>
+                    <p class="text-xs text-primary font-semibold mt-1 mb-2">CTO & Co-Founder</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Engineer berpengalaman spesialisasi platform skala besar dan infrastruktur cloud.</p>
+                </div>
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://i.pravatar.cc/200?img=15" alt="Head Edu" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">Budi Prasetyo</h4>
+                    <p class="text-xs text-secondary font-semibold mt-1 mb-2">Head of Education</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Bertanggung jawab atas kurikulum dan kualitas konten pembelajaran LearnHub.</p>
+                </div>
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://i.pravatar.cc/200?img=9" alt="Designer" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">Sari Indah</h4>
+                    <p class="text-xs text-secondary font-semibold mt-1 mb-2">Lead Designer</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Menciptakan pengalaman visual yang indah, intuitif, dan menyenangkan digunakan.</p>
+                </div>
+            </div>
+
+            <!-- Extended team -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://i.pravatar.cc/200?img=20" alt="Marketing" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">Rina Maharani</h4>
+                    <p class="text-xs text-primary font-semibold mt-1 mb-2">Head of Marketing</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Strategi pertumbuhan dan brand awareness LearnHub di seluruh Indonesia.</p>
+                </div>
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://i.pravatar.cc/200?img=33" alt="Backend" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">Fajar Nugroho</h4>
+                    <p class="text-xs text-primary font-semibold mt-1 mb-2">Senior Engineer</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Memastikan platform berjalan cepat, stabil, dan aman untuk semua pengguna.</p>
+                </div>
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://i.pravatar.cc/200?img=47" alt="Content" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">Maya Puspita</h4>
+                    <p class="text-xs text-secondary font-semibold mt-1 mb-2">Content Manager</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Mengelola kualitas dan konsistensi konten di seluruh platform dan media sosial.</p>
+                </div>
+                <div class="team-card reveal bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm">
+                    <div class="overflow-hidden rounded-2xl mb-4">
+                        <img src="https://i.pravatar.cc/200?img=60" alt="CS" class="w-full h-44 object-cover rounded-2xl">
+                    </div>
+                    <h4 class="font-bold text-dark">Hendra Wijaya</h4>
+                    <p class="text-xs text-secondary font-semibold mt-1 mb-2">Community Lead</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Membangun dan mengelola komunitas pelajar LearnHub yang aktif dan suportif.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CTA ═══════════ -->
+    <section class="py-20 bg-gradient-to-br from-indigo-600 to-indigo-800 relative overflow-hidden">
+        <div class="animate-blob absolute -top-20 -right-20 w-80 h-80 bg-white/5 rounded-full pointer-events-none"></div>
+        <div class="animate-blob animation-delay-2000 absolute -bottom-20 -left-20 w-80 h-80 bg-teal-400/10 rounded-full pointer-events-none"></div>
+        <div class="max-w-3xl mx-auto px-4 text-center relative z-10 reveal">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+                Siap Memulai Perjalanan Belajar?
+            </h2>
+            <p class="text-indigo-200 mb-8 text-lg">
+                Bergabunglah dengan 10.000+ pelajar yang sudah merasakan manfaat LearnHub.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="signup.html" class="bg-white hover:bg-gray-50 text-primary px-8 py-3 rounded-full font-bold text-lg transition shadow-xl">
+                    Daftar Gratis Sekarang
+                </a>
+                <a href="index2.html" class="border-2 border-white/40 hover:border-white text-white px-8 py-3 rounded-full font-bold text-lg transition">
+                    ← Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="bg-dark text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-sm">L</div>
+                    <span class="font-bold text-xl text-white">LearnHub</span>
+                </div>
+                <div class="flex gap-6 text-sm">
+                    <a href="index2.html" class="hover:text-white transition">Beranda</a>
+                    <a href="about.html" class="text-white font-medium">Tentang Kami</a>
+                    <a href="signup.html" class="hover:text-white transition">Daftar</a>
+                    <a href="login.html" class="hover:text-white transition">Masuk</a>
+                </div>
+                <p class="text-sm">&copy; 2026 LearnHub. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-</body>
 
+    <script>
+        document.getElementById('mobile-btn').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
 </html>
