@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk</title>
+
+  <link rel="stylesheet" href="login.css" />
+</head>
+
+<body class="page">
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-row">
+        <a href="index.html" class="brand">
+          <div class="brand-badge">H</div>
+          <span class="brand-text">HOME</span>
+        </a>
+        <div>
+          <a href="index.html" class="nav-link">Kembali ke Beranda</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="card">
+      <div class="card-head">
+        <h2 class="title">Masuk</h2>
+        <p class="subtitle">
+          Belum punya akun?
+          <a href="signup.html" class="link">Daftar</a>
+        </p>
+      </div>
+
+      <form id="loginForm" class="form" action="#" method="POST" novalidate>
+        <div class="field-stack" role="group" aria-label="Login fields">
+
+          <div class="field">
+            <label for="email-address" class="sr-only">Alamat Email</label>
+            <input
+              id="email-address"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              class="input"
+              placeholder="Alamat Email"
+            />
+          </div>
+
+          <div class="field">
+            <label for="password" class="sr-only">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              required
+              class="input"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+
+        <div class="row-between">
+          <label class="remember">
+            <input id="remember" type="checkbox" class="checkbox" />
+            Ingat saya
+          </label>
+
+          <a href="#" class="link link-small">Lupa password?</a>
+        </div>
+
+        <div>
+          <button type="submit" class="btn-primary">
+            Masuk
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-text">&copy; 2026 Platform Microlearning. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
