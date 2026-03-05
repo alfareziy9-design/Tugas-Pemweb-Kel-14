@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar</title>
+
+  <link rel="stylesheet" href="signup.css" />
+</head>
+
+<body class="page">
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-row">
+        <a href="index.html" class="brand">
+          <div class="brand-badge">H</div>
+          <span class="brand-text">HOME</span>
+        </a>
+        <div>
+          <a href="index.html" class="nav-link">Kembali ke Beranda</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="main">
+    <div class="card">
+      <div class="card-head">
+        <h2 class="title">Buat Akun Baru</h2>
+        <p class="subtitle">
+          Sudah punya akun?
+          <a href="login.html" class="link">Masuk</a>
+        </p>
+      </div>
+
+      <form class="form" action="#" method="POST">
+        <div class="field-stack" role="group" aria-label="Signup fields">
+
+          <div class="field">
+            <label for="nama" class="sr-only">Nama Lengkap</label>
+            <input
+              id="nama"
+              name="nama"
+              type="text"
+              required
+              class="input input-top"
+              placeholder="Nama Lengkap"
+            />
+          </div>
+
+          <div class="field">
+            <label for="email-address" class="sr-only">Alamat Email</label>
+            <input
+              id="email-address"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              class="input"
+              placeholder="Alamat Email"
+            />
+          </div>
+
+          <div class="field">
+            <label for="password" class="sr-only">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              required
+              class="input"
+              placeholder="Password"
+            />
+          </div>
+
+          <div class="field">
+            <label for="confirm-password" class="sr-only">Konfirmasi Password</label>
+            <input
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              autocomplete="new-password"
+              required
+              class="input input-bottom"
+              placeholder="Konfirmasi Password"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="btn-primary">
+            Daftar Sekarang
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-text">&copy; 2026 Platform Microlearning. All rights reserved.</p>
+    </div>
+  </footer>
+<script src="signup.js"></script>
+</body>
+</html>
