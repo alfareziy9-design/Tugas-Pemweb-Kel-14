@@ -11,11 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const passwordValue = password.value.trim();
     const confirmPasswordValue = confirmPassword.value.trim();
 
-    // REGEX
+    // ini REGEX utk validasi
     const namaRegex = /^[A-Za-z']+(\s[A-Za-z']+)*$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    // VALIDASI NAMA
     if(!namaRegex.test(namaValue)){
       alert("Nama lengkap hanya boleh berisi huruf dan tanda petik satu (').");
       nama.focus();
@@ -23,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // VALIDASI PASSWORD
     if(!passwordRegex.test(passwordValue)){
       alert("Password minimal 8 karakter dan harus mengandung huruf serta angka.");
       password.focus();
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // VALIDASI CONFIRM PASSWORD
     if(passwordValue !== confirmPasswordValue){
       alert("Konfirmasi password tidak sama.");
       confirmPassword.focus();
@@ -40,5 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   });
+
 
 });
